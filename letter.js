@@ -1,4 +1,5 @@
 //DESENVOLVIDO POR WELBERT SERRA ---------------------------------------------
+var fator = 0.33; //(Fiz a tela com -3 a 3, e houve uma mudança para -1 e 1. esse fator foi encontrado por uma regra de 3;
 function DrawLetter(letter){
 	RemoveAllObjectsInScene();
 	switch (String(letter).toUpperCase()) {
@@ -11,33 +12,33 @@ function DrawLetter(letter){
 				});
 			
 			var geometry = new THREE.Geometry();
-			geometry.vertices.push(	 new THREE.Vector3( -2.5,  -2.0, 0.0 ),//0
-									new THREE.Vector3( -1.25, -2.0, 0.0 ),//1
-									new THREE.Vector3(  -0.85,  -0.75, 0.0 ),//2
-									new THREE.Vector3(  0.85, -0.75, 0.0 ),//3
-									new THREE.Vector3(  1.25,  -2.0, 0.0 ),//4
-									new THREE.Vector3(  2.5,  -2.0, 0.0 ),//5
-									new THREE.Vector3(  0.5,  2.5, 0.0 ),//6
-									new THREE.Vector3(  0.25,  2.5, 0.0),//7
-									new THREE.Vector3(  -0.25,  2.5, 0.0),//8
-									new THREE.Vector3(  -0.5,  2.5, 0.0 ),//9
+			geometry.vertices.push(	new THREE.Vector3( -2.5*fator,  -2.0*fator, 0.0*fator ),//0
+									new THREE.Vector3( -1.25*fator, -2.0*fator, 0.0*fator ),//1
+									new THREE.Vector3( -0.85*fator, -0.75*fator,0.0*fator ),//2
+									new THREE.Vector3(  0.85*fator, -0.75*fator,0.0*fator ),//3
+									new THREE.Vector3(  1.25*fator, -2.0*fator, 0.0*fator ),//4
+									new THREE.Vector3(  2.5*fator,  -2.0*fator, 0.0*fator ),//5
+									new THREE.Vector3(  0.5*fator,   2.5*fator, 0.0*fator ),//6
+									new THREE.Vector3(  0.25*fator,  2.5*fator, 0.0*fator),//7
+									new THREE.Vector3( -0.25*fator,  2.5*fator, 0.0*fator),//8
+									new THREE.Vector3( -0.5*fator,   2.5*fator, 0.0*fator ),//9
 									
-									new THREE.Vector3( -0.75,  0.0, 0.0 ),//10
-									new THREE.Vector3( 0.75, 0.0, 0.0 ),//11
+									new THREE.Vector3( -0.75*fator,  0.0*fator, 0.0*fator ),//10
+									new THREE.Vector3(  0.75*fator,  0.0*fator, 0.0*fator ),//11
 									
-									new THREE.Vector3( -2.5,  -2.0, 1.0 ),//0
-									new THREE.Vector3( -1.25, -2.0, 1.0 ),//1
-									new THREE.Vector3(  -0.85,  -0.75, 1.0 ),//2
-									new THREE.Vector3(  0.85, -0.75, 1.0 ),//3
-									new THREE.Vector3(  1.25,  -2.0, 1.0 ),//4
-									new THREE.Vector3(  2.5,  -2.0, 1.0 ),//5
-									new THREE.Vector3(  0.5,  2.5, 1.0 ),//6
-									new THREE.Vector3(  0.25,  2.5, 1.0),//7
-									new THREE.Vector3(  -0.25,  2.5, 1.0),//8
-									new THREE.Vector3(  -0.5,  2.5, 1.0 ),//9
+									new THREE.Vector3( -2.5*fator,  -2.0*fator, 1.0*fator ),//0
+									new THREE.Vector3( -1.25*fator, -2.0*fator, 1.0*fator ),//1
+									new THREE.Vector3( -0.85*fator, -0.75*fator,1.0*fator ),//2
+									new THREE.Vector3(  0.85*fator, -0.75*fator,1.0*fator ),//3
+									new THREE.Vector3(  1.25*fator, -2.0*fator, 1.0*fator ),//4
+									new THREE.Vector3(  2.5*fator,  -2.0*fator, 1.0*fator ),//5
+									new THREE.Vector3(  0.5*fator,   2.5*fator, 1.0*fator ),//6
+									new THREE.Vector3(  0.25*fator,  2.5*fator, 1.0*fator),//7
+									new THREE.Vector3( -0.25*fator,  2.5*fator, 1.0*fator),//8
+									new THREE.Vector3( -0.5*fator,   2.5*fator, 1.0*fator ),//9
 									
-									new THREE.Vector3( -0.75,  0.0, 1.0 ),//10
-									new THREE.Vector3( 0.75, 0.0, 1.0 )	//11
+									new THREE.Vector3( -0.75*fator, 0.0*fator, 1.0*fator ),//10
+									new THREE.Vector3(  0.75*fator, 0.0*fator, 1.0*fator )	//11
 										);
 			
 			//Fundo
@@ -98,34 +99,34 @@ function DrawLetter(letter){
 				wireframe:false
 				});
 			var geometry = new THREE.Geometry();
-			geometry.vertices.push(	new THREE.Vector3( 1.5,  2.5, 0.0 ),//0
-									new THREE.Vector3(-1.0,  2.5, 0.0 ),//1 ponto importante
-									new THREE.Vector3(-2.0,  2.5, 0.0 ),//2									
-									new THREE.Vector3(-2.0, -2.5, 0.0 ),//3
-									new THREE.Vector3(-1.0, -2.5, 0.0 ),//4 ponto importante 
-									new THREE.Vector3( 1.5, -2.5, 0.0 ),//5
-									new THREE.Vector3( 1.5, -1.5, 0.0 ),//6
-									new THREE.Vector3(-1.0, -1.5, 0.0 ),//7
-									new THREE.Vector3(-1.0, -0.5, 0.0 ),//8
-									new THREE.Vector3( 1.0, -0.5, 0.0 ),//9
-									new THREE.Vector3( 1.0,  0.5, 0.0 ),//10
-									new THREE.Vector3(-1.0,  0.5, 0.0 ),//11
-									new THREE.Vector3(-1.0,  1.5, 0.0 ),//12
-									new THREE.Vector3( 1.5,  1.5, 0.0 ),//13
-									new THREE.Vector3( 1.5,  2.5, 1.0 ),//0
-									new THREE.Vector3(-1.0,  2.5, 1.0 ),//1 ponto importante
-									new THREE.Vector3(-2.0,  2.5, 1.0 ),//2									
-									new THREE.Vector3(-2.0, -2.5, 1.0 ),//3
-									new THREE.Vector3(-1.0, -2.5, 1.0 ),//4 ponto importante 
-									new THREE.Vector3( 1.5, -2.5, 1.0 ),//5
-									new THREE.Vector3( 1.5, -1.5, 1.0 ),//6
-									new THREE.Vector3(-1.0, -1.5, 1.0 ),//7
-									new THREE.Vector3(-1.0, -0.5, 1.0 ),//8
-									new THREE.Vector3( 1.0, -0.5, 1.0 ),//9
-									new THREE.Vector3( 1.0,  0.5, 1.0 ),//10
-									new THREE.Vector3(-1.0,  0.5, 1.0 ),//11
-									new THREE.Vector3(-1.0,  1.5, 1.0 ),//12
-									new THREE.Vector3( 1.5,  1.5, 1.0 )//13
+			geometry.vertices.push(	new THREE.Vector3( 1.5*fator,  2.5*fator, 0.0*fator ),//0
+									new THREE.Vector3(-1.0*fator,  2.5*fator, 0.0*fator ),//1 ponto importante
+									new THREE.Vector3(-2.0*fator,  2.5*fator, 0.0*fator ),//2									
+									new THREE.Vector3(-2.0*fator, -2.5*fator, 0.0*fator ),//3
+									new THREE.Vector3(-1.0*fator, -2.5*fator, 0.0*fator ),//4 ponto importante 
+									new THREE.Vector3( 1.5*fator, -2.5*fator, 0.0*fator ),//5
+									new THREE.Vector3( 1.5*fator, -1.5*fator, 0.0*fator ),//6
+									new THREE.Vector3(-1.0*fator, -1.5*fator, 0.0*fator ),//7
+									new THREE.Vector3(-1.0*fator, -0.5*fator, 0.0*fator ),//8
+									new THREE.Vector3( 1.0*fator, -0.5*fator, 0.0*fator ),//9
+									new THREE.Vector3( 1.0*fator,  0.5*fator, 0.0*fator ),//10
+									new THREE.Vector3(-1.0*fator,  0.5*fator, 0.0*fator ),//11
+									new THREE.Vector3(-1.0*fator,  1.5*fator, 0.0*fator ),//12
+									new THREE.Vector3( 1.5*fator,  1.5*fator, 0.0*fator ),//13
+									new THREE.Vector3( 1.5*fator,  2.5*fator, 1.0*fator ),//0
+									new THREE.Vector3(-1.0*fator,  2.5*fator, 1.0*fator ),//1 ponto importante
+									new THREE.Vector3(-2.0*fator,  2.5*fator, 1.0*fator ),//2									
+									new THREE.Vector3(-2.0*fator, -2.5*fator, 1.0*fator ),//3
+									new THREE.Vector3(-1.0*fator, -2.5*fator, 1.0*fator ),//4 ponto importante 
+									new THREE.Vector3( 1.5*fator, -2.5*fator, 1.0*fator ),//5
+									new THREE.Vector3( 1.5*fator, -1.5*fator, 1.0*fator ),//6
+									new THREE.Vector3(-1.0*fator, -1.5*fator, 1.0*fator ),//7
+									new THREE.Vector3(-1.0*fator, -0.5*fator, 1.0*fator ),//8
+									new THREE.Vector3( 1.0*fator, -0.5*fator, 1.0*fator ),//9
+									new THREE.Vector3( 1.0*fator,  0.5*fator, 1.0*fator ),//10
+									new THREE.Vector3(-1.0*fator,  0.5*fator, 1.0*fator ),//11
+									new THREE.Vector3(-1.0*fator,  1.5*fator, 1.0*fator ),//12
+									new THREE.Vector3( 1.5*fator,  1.5*fator, 1.0*fator )//13
 								);
 			//Fundo
 			geometry.faces.push(new THREE.Face3(0, 1, 13));
@@ -202,14 +203,14 @@ function DrawLetter(letter){
 				});
 			
 			var geometry = new THREE.Geometry();
-			geometry.vertices.push(	 new THREE.Vector3( -0.5,  2.5, 0.0 ), //0
-									new THREE.Vector3( 0.5, 2.5, 0.0 ),// 1
-									new THREE.Vector3(  0.5,  -2.0, 0.0 ),//2
-									new THREE.Vector3(  -0.5, -2.0, 0.0 ),//3
-									new THREE.Vector3( -0.5,  2.5, 1.0 ),//4
-									new THREE.Vector3( 0.5, 2.5, 1.0 ),//5
-									new THREE.Vector3(  0.5,  -2.0, 1.0 ),//6
-									new THREE.Vector3(  -0.5, -2.0, 1.0 )//7
+			geometry.vertices.push(	new THREE.Vector3(  -0.5*fator,  2.5*fator, 0.0*fator ), //0
+									new THREE.Vector3(   0.5*fator,  2.5*fator, 0.0*fator ),// 1
+									new THREE.Vector3(   0.5*fator, -2.0*fator, 0.0*fator ),//2
+									new THREE.Vector3(  -0.5*fator, -2.0*fator, 0.0*fator ),//3
+									new THREE.Vector3(  -0.5*fator,  2.5*fator, 1.0*fator ),//4
+									new THREE.Vector3(   0.5*fator,  2.5*fator, 1.0*fator ),//5
+									new THREE.Vector3(   0.5*fator, -2.0*fator, 1.0*fator ),//6
+									new THREE.Vector3(  -0.5*fator, -2.0*fator, 1.0*fator )//7
 										);
 			//Fundo
 			geometry.faces.push(new THREE.Face3(0, 1, 3)); 
@@ -262,8 +263,8 @@ function DrawLetter(letter){
 				var xe = raioExterno * Math.cos(i)/1.1;
 				var ye = raioExterno * Math.sin(i)*1.2;
 				
-				geometry.vertices.push(new THREE.Vector3( xi,  yi, 0.0));
-				geometry.vertices.push(new THREE.Vector3( xe,  ye, 0.0));
+				geometry.vertices.push(new THREE.Vector3( xi*fator,  yi*fator, 0.0));
+				geometry.vertices.push(new THREE.Vector3( xe*fator,  ye*fator, 0.0));
 			}
 			for (i = 0 ; i < 2*Math.PI ; i+= (2*Math.PI)/numVertices) {
 				var xi = raioInterno * Math.cos(i)/1.1;
@@ -271,8 +272,8 @@ function DrawLetter(letter){
 				var xe = raioExterno * Math.cos(i)/1.1;
 				var ye = raioExterno * Math.sin(i)*1.2;
 				
-				geometry.vertices.push(new THREE.Vector3( xi,  yi, 1.0));
-				geometry.vertices.push(new THREE.Vector3( xe,  ye, 1.0));
+				geometry.vertices.push(new THREE.Vector3( xi*fator,  yi*fator, 1.0*fator));
+				geometry.vertices.push(new THREE.Vector3( xe*fator,  ye*fator, 1.0*fator));
 			}
 			var j;
 			//Fundo
@@ -320,24 +321,24 @@ function DrawLetter(letter){
 			var raioExterno = 2.2;
 			var geometry = new THREE.Geometry();
 			geometry.vertices.push(
-					new THREE.Vector3( -2.0, -0.5, 0.0 ),//0
-					new THREE.Vector3( -2.0,  2.5, 0.0 ),//1
-					new THREE.Vector3( -1.09,  2.5, 0.0 ),//2
-					new THREE.Vector3( -1.09, -0.5, 0.0 ),//3
-					new THREE.Vector3(  2.0, -0.5, 0.0 ),//4
-					new THREE.Vector3(  2.0,  2.5, 0.0 ),//5
-					new THREE.Vector3(  1.09,  2.5, 0.0 ),//6
-					new THREE.Vector3(  1.09, -0.5, 0.0 ) //7
+					new THREE.Vector3( -2.0*fator, -0.5*fator, 0.0*fator ),//0
+					new THREE.Vector3( -2.0*fator,  2.5*fator, 0.0*fator ),//1
+					new THREE.Vector3( -1.09*fator,  2.5*fator, 0.0*fator ),//2
+					new THREE.Vector3( -1.09*fator, -0.5*fator, 0.0*fator ),//3
+					new THREE.Vector3(  2.0*fator, -0.5*fator, 0.0*fator ),//4
+					new THREE.Vector3(  2.0*fator,  2.5*fator, 0.0*fator ),//5
+					new THREE.Vector3(  1.09*fator,  2.5*fator, 0.0*fator ),//6
+					new THREE.Vector3(  1.09*fator, -0.5*fator, 0.0*fator ) //7
 			);
 			geometry.vertices.push(
-					new THREE.Vector3( -2.0, -0.5, 1.0 ),//0
-					new THREE.Vector3( -2.0,  2.5, 1.0 ),//1
-					new THREE.Vector3( -1.09,  2.5, 1.0 ),//2
-					new THREE.Vector3( -1.09, -0.5, 1.0 ),//3
-					new THREE.Vector3(  2.0, -0.5, 1.0 ),//4
-					new THREE.Vector3(  2.0,  2.5, 1.0 ),//5
-					new THREE.Vector3(  1.09,  2.5, 1.0 ),//6
-					new THREE.Vector3(  1.09, -0.5, 1.0 ) //7
+					new THREE.Vector3( -2.0*fator, -0.5*fator, 1.0*fator ),//0
+					new THREE.Vector3( -2.0*fator,  2.5*fator, 1.0*fator ),//1
+					new THREE.Vector3( -1.09*fator,  2.5*fator, 1.0*fator ),//2
+					new THREE.Vector3( -1.09*fator, -0.5*fator, 1.0*fator ),//3
+					new THREE.Vector3(  2.0*fator, -0.5*fator, 1.0*fator ),//4
+					new THREE.Vector3(  2.0*fator,  2.5*fator, 1.0*fator ),//5
+					new THREE.Vector3(  1.09*fator,  2.5*fator, 1.0*fator ),//6
+					new THREE.Vector3(  1.09*fator, -0.5*fator, 1.0*fator ) //7
 			);
 			
 			for (i = Math.PI ; i < 2*Math.PI ; i+= (2*Math.PI)/numVertices) {
@@ -346,8 +347,8 @@ function DrawLetter(letter){
 				var xe = raioExterno * Math.cos(i)/1.1;
 				var ye = raioExterno * Math.sin(i)*0.9;
 				
-				geometry.vertices.push(new THREE.Vector3( xi,  yi-0.5, 0.0));
-				geometry.vertices.push(new THREE.Vector3( xe,  ye-0.5, 0.0));
+				geometry.vertices.push(new THREE.Vector3( xi*fator,  (yi-0.5)*fator, 0.0));
+				geometry.vertices.push(new THREE.Vector3( xe*fator,  (ye-0.5)*fator, 0.0));
 			}
 			
 			
@@ -357,8 +358,8 @@ function DrawLetter(letter){
 				var xe = raioExterno * Math.cos(i)/1.1;
 				var ye = raioExterno * Math.sin(i)*0.9;
 				
-				geometry.vertices.push(new THREE.Vector3( xi,  yi-0.5, 1.0));
-				geometry.vertices.push(new THREE.Vector3( xe,  ye-0.5, 1.0));
+				geometry.vertices.push(new THREE.Vector3( xi*fator,  (yi-0.5)*fator, 1.0*fator));
+				geometry.vertices.push(new THREE.Vector3( xe*fator,  (ye-0.5)*fator, 1.0*fator));
 			}
 			var j;
 			var incFrentePernas = 8;
