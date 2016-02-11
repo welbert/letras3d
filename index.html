@@ -1,0 +1,50 @@
+<html>
+<head>
+<title>CG - Atividade 1 - Welbert Serra</title>
+</head>
+
+<script type="text/javascript" src="three.min.js"></script>
+<script type="text/javascript" src="letter.js"></script>
+<script type="text/javascript">
+//DESENVOLVIDO POR WELBERT SERRA ---------------------------------------------
+var scene = new THREE.Scene();
+var camera = new THREE.OrthographicCamera(-3.0, 3.0, 3.0, -3.0, -3.0, 3.0);
+var renderer = new THREE.WebGLRenderer();
+
+	function Init(){
+		scene.add(camera);
+		
+		renderer.setSize(500, 500);
+		renderer.setClearColor(new THREE.Color(255.0, 255.0, 255.0));
+		
+		DrawLetter("A");
+		
+		document.getElementById("WebGL-output").appendChild(renderer.domElement);
+		renderer.clear();
+		renderer.render(scene, camera);
+	}	
+	
+	function KeyPressed(e){
+
+        var keynum;
+
+        if(window.event)				
+        	keynum = e.keyCode;
+        else
+            if(e.which)					
+        		keynum = e.which;
+             
+        var text = String.fromCharCode(keynum);
+        text = text.toUpperCase();
+        if((text=="A")||(text=="E")||(text=="I")||(text=="O")||(text=="U"))
+        	DrawLetter(text);
+        else
+        	console.log("Letra Inválida: "+text);
+        	
+	}
+</script>
+<body onload="Init();" onkeypress="KeyPressed(event)">
+	
+	<div id="WebGL-output"></div>
+</body>
+</html>
