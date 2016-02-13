@@ -3,15 +3,23 @@ var rotationX=1 , rotationY=1, rotationZ=1;
 var rotationAngle = -Math.PI/4; 
 var fator = 0.33; //(Fiz a tela com -3 a 3, e houve uma mudança para -1 e 1. esse fator foi encontrado por uma regra de 3;
 
+var geometryMeshFloor;
 var geometryMeshLetterA;
 var geometryMeshLetterE;
 var geometryMeshLetterI;
 var geometryMeshLetterO;
 var geometryMeshLetterU;
+ConstructFloor();
 ConstructAllLetter();
+
 
 function DrawLetter(letter){
 	RemoveAllObjectsInScene();
+	geometryMeshFloor.rotateOnAxis(
+			new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
+	scene.add( geometryMeshFloor );	
+	renderer.clear();
+	renderer.render(scene, camera);
 	switch (String(letter).toUpperCase()) {
 		case "A":
 			geometryMeshLetterA.rotateOnAxis(
@@ -64,6 +72,43 @@ function DrawLetter(letter){
 		default:
 			break;
 	}
+}
+
+function ConstructFloor() {
+	var triangleMaterialFloor = new THREE.MeshBasicMaterial({ 
+		color:0x000000, 
+		vertexColors:THREE.VertexColors,
+		side:THREE.DoubleSide,
+		wireframe:false
+		});
+
+	var geometryFloor = new THREE.Geometry();
+	geometryFloor.vertices.push(	new THREE.Vector3(  2.95*fator, -2.95*fator, 2.95*fator ),//0
+									new THREE.Vector3( -2.95*fator, -2.95*fator, 2.95*fator ),//1
+									new THREE.Vector3( -2.95*fator, -2.95*fator,-2.95*fator ),//2
+									new THREE.Vector3(  2.95*fator, -2.95*fator,-2.95*fator ),//3
+									new THREE.Vector3(  2.95*fator, -2.75*fator, 2.95*fator ),//0
+									new THREE.Vector3( -2.95*fator, -2.75*fator, 2.95*fator ),//1
+									new THREE.Vector3( -2.95*fator, -2.75*fator,-2.95*fator ),//2
+									new THREE.Vector3(  2.95*fator, -2.75*fator,-2.95*fator ))//3
+								
+	//Plano								
+	geometryFloor.faces.push(new THREE.Face3( 0, 1, 2));
+	geometryFloor.faces.push(new THREE.Face3( 0, 3, 2));
+	geometryFloor.faces.push(new THREE.Face3( 0+4, 1+4, 2+4));
+	geometryFloor.faces.push(new THREE.Face3( 0+4, 3+4, 2+4));
+	
+	//Lados
+	geometryFloor.faces.push(new THREE.Face3( 0, 1+4, 0+4));
+	geometryFloor.faces.push(new THREE.Face3( 0, 1+4, 1));
+	geometryFloor.faces.push(new THREE.Face3( 1, 2+4, 1+4));
+	geometryFloor.faces.push(new THREE.Face3( 1, 2+4, 2));
+	geometryFloor.faces.push(new THREE.Face3( 2, 3+4, 2+4));
+	geometryFloor.faces.push(new THREE.Face3( 2, 3+4, 3));
+	geometryFloor.faces.push(new THREE.Face3( 3, 0+4, 3+4));
+	geometryFloor.faces.push(new THREE.Face3( 3, 0+4, 0));
+	
+	geometryMeshFloor = new THREE.Mesh(geometryFloor, triangleMaterialFloor); 
 }
 
 function ConstructAllLetter(){
