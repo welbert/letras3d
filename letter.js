@@ -1,7 +1,9 @@
 //DESENVOLVIDO POR WELBERT SERRA ---------------------------------------------
 var rotationX=1 , rotationY=1, rotationZ=1;
-var rotationAngle = -Math.PI/4; 
-var fator = 0.33; //(Fiz a tela com -3 a 3, e houve uma mudança para -1 e 1. esse fator foi encontrado por uma regra de 3;
+var rotationAngle = 0;//-Math.PI/4; 
+var fator = 0.05; 
+
+var incAnimation = 0;
 
 var geometryMeshFloor;
 var geometryMeshLetterA;
@@ -14,16 +16,19 @@ ConstructAllLetter();
 
 
 function DrawLetter(letter){
-	RemoveAllObjectsInScene();
-	geometryMeshFloor.rotateOnAxis(
-			new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
-	scene.add( geometryMeshFloor );	
-	renderer.clear();
-	renderer.render(scene, camera);
+	//RemoveAllObjectsInScene();
+	//geometryMeshFloor.rotateOnAxis(
+		//	new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
+	//scene.add( geometryMeshFloor );	
+	//Render();
 	switch (String(letter).toUpperCase()) {
 		case "A":
 			geometryMeshLetterA.rotateOnAxis(
 					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
+
+			var position = new THREE.Vector3();
+			geometryMeshLetterA.translateOnAxis(
+					new THREE.Vector3(-1, -1, 0).normalize(),1.15);
 			scene.add( geometryMeshLetterA );	
 			
 			renderer.clear();
@@ -34,6 +39,9 @@ function DrawLetter(letter){
 			
 			geometryMeshLetterE.rotateOnAxis(
 					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle); 
+			
+			geometryMeshLetterE.translateOnAxis(
+					new THREE.Vector3(-0.47, -1, 0).normalize(),0.88);
 			scene.add( geometryMeshLetterE );				
 			
 			renderer.clear();
@@ -43,7 +51,10 @@ function DrawLetter(letter){
 		case "I":
 			
 			geometryMeshLetterI.rotateOnAxis(
-					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle); 
+					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
+			
+			geometryMeshLetterI.translateOnAxis(
+					new THREE.Vector3(0, -1, 0).normalize(),0.81);
 			scene.add( geometryMeshLetterI );				
 			
 			renderer.clear();
@@ -53,7 +64,10 @@ function DrawLetter(letter){
 		case "O":
 			 
 			geometryMeshLetterO.rotateOnAxis(
-					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle); 
+					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
+			
+			geometryMeshLetterO.translateOnAxis(
+					new THREE.Vector3(0.5, -1, 0).normalize(),0.9);
 			scene.add( geometryMeshLetterO );		
 			
 			renderer.clear();
@@ -64,6 +78,9 @@ function DrawLetter(letter){
 			
 			geometryMeshLetterU.rotateOnAxis(
 					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
+			
+			geometryMeshLetterU.translateOnAxis(
+					new THREE.Vector3(1, -1, 0).normalize(),1.11);
 			scene.add( geometryMeshLetterU );
 			
 			renderer.clear();
@@ -74,6 +91,118 @@ function DrawLetter(letter){
 	}
 }
 
+
+function Animation(){
+	if(incAnimation>89)
+		incAnimation=0;
+	
+	switch (Math.floor(incAnimation/15)) {
+	case 0:
+		geometryMeshLetterA.scale.x += 0.035;
+		
+		geometryMeshLetterE.translateX(0.01);
+
+		geometryMeshLetterI.rotateOnAxis(
+				new THREE.Vector3(0, 0, 1),-0.105);
+		
+		geometryMeshLetterO.rotateOnAxis(
+				new THREE.Vector3(1, 0, 0),0.1);
+		
+		
+		incAnimation++;
+	break;
+	
+	case 1:
+		geometryMeshLetterA.translateY(0.003);
+		geometryMeshLetterA.scale.y += 0.035;
+		
+		geometryMeshLetterE.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0),-0.210);
+		geometryMeshLetterE.translateX(-0.01);
+		
+		geometryMeshLetterI.translateX(-0.011);
+		
+		geometryMeshLetterO.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0),-0.1);
+		
+		geometryMeshLetterU.translateY(0.01);
+		geometryMeshLetterU.scale.x += 0.05;
+		geometryMeshLetterU.scale.y += 0.05;
+		
+		incAnimation++;
+	break;
+	
+	case 2:
+		geometryMeshLetterA.translateY(-0.003);
+		geometryMeshLetterA.scale.y -= 0.035;
+		
+		geometryMeshLetterE.translateX(-0.01);
+		
+		geometryMeshLetterO.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0),0.1);
+		
+		geometryMeshLetterU.rotateOnAxis(
+				new THREE.Vector3(0, 0, 1),0.105);
+		
+		incAnimation++;
+	break;
+	
+	case 3:
+		geometryMeshLetterA.scale.x -= 0.035;
+		
+		geometryMeshLetterE.translateX(0.01);
+		
+		geometryMeshLetterI.rotateOnAxis(
+				new THREE.Vector3(0, 0, 1),-0.105);
+		
+		geometryMeshLetterO.rotateOnAxis(
+				new THREE.Vector3(1, 0, 0),-0.1);
+		
+		
+		incAnimation++;
+	break;
+	
+	case 4:
+		geometryMeshLetterA.scale.x -= 0.035;
+		
+		geometryMeshLetterE.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0),-0.105);
+		
+		geometryMeshLetterI.translateX(-0.011);
+		
+		geometryMeshLetterO.translateX(-0.01);
+		geometryMeshLetterO.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0),-0.1);
+		
+		geometryMeshLetterU.rotateOnAxis(
+				new THREE.Vector3(0, 0, 1),-0.105);
+		geometryMeshLetterU.scale.x -= 0.05;
+		geometryMeshLetterU.scale.y -= 0.05;
+		
+		incAnimation++;
+	break;
+	
+	case 5:
+		geometryMeshLetterA.scale.x += 0.035;
+		
+		geometryMeshLetterE.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0),0.105);
+		
+		geometryMeshLetterO.translateX(0.011);
+		geometryMeshLetterO.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0),0.1);
+		
+		geometryMeshLetterU.translateY(-0.01);
+		
+		incAnimation++;
+	break;
+
+	default:
+		break;
+	}
+	
+}
+
 function ConstructFloor() {
 	var triangleMaterialFloor = new THREE.MeshBasicMaterial({ 
 		color:0x000000, 
@@ -81,7 +210,7 @@ function ConstructFloor() {
 		side:THREE.DoubleSide,
 		wireframe:false
 		});
-
+	var fator = 0.33;
 	var geometryFloor = new THREE.Geometry();
 	geometryFloor.vertices.push(	new THREE.Vector3(  2.95*fator, -2.95*fator, 2.95*fator ),//0
 									new THREE.Vector3( -2.95*fator, -2.95*fator, 2.95*fator ),//1

@@ -17,12 +17,37 @@ var renderer = new THREE.WebGLRenderer();
 		renderer.setSize(500, 500);
 		renderer.setClearColor(new THREE.Color(255.0, 255.0, 255.0));
 		
-		DrawLetter("A");
+		DrawLetter("A");	
+		DrawLetter("E");
+		DrawLetter("I");
+		DrawLetter("O");
+		DrawLetter("U");
+		scene.add( geometryMeshFloor );
 		
 		document.getElementById("WebGL-output").appendChild(renderer.domElement);
+		Render();
+	}	
+	
+	window.requestAnimFrame = (function(){
+		/*
+        return window.requestAnimationFrame       || 
+        window.webkitRequestAnimationFrame || 
+        window.mozRequestAnimationFrame    || 
+        window.oRequestAnimationFrame      || 
+        window.msRequestAnimationFrame     || 
+        */  
+		return  function(/* function */ callback, /* DOMElement */ element){
+	                window.setTimeout(callback, 50);
+	              };
+	              
+	    })();
+	
+	function Render(){
 		renderer.clear();
 		renderer.render(scene, camera);
-	}	
+		requestAnimFrame(Render);
+		Animation();	
+	}
 	
 	function KeyPressed(e){
 
@@ -36,10 +61,10 @@ var renderer = new THREE.WebGLRenderer();
              
         var text = String.fromCharCode(keynum);
         text = text.toUpperCase();
-        if((text=="A")||(text=="E")||(text=="I")||(text=="O")||(text=="U"))
-        	DrawLetter(text);
-        else
-        	console.log("Letra Inválida: "+text);
+        //if((text=="A")||(text=="E")||(text=="I")||(text=="O")||(text=="U"))
+        	//DrawLetter(text);
+        //else
+        	//console.log("Letra Inválida: "+text);
         	
 	}
 </script>
