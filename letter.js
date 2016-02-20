@@ -1,9 +1,11 @@
 //DESENVOLVIDO POR WELBERT SERRA ---------------------------------------------
 var rotationX=1 , rotationY=1, rotationZ=1;
 var rotationAngle = 0;//-Math.PI/4; 
-var fator = 0.05; 
+var fator = 0.05;
+var fatorfloor = 0.33; //MAX 0.33 , pois tem q ir de -1 a 1
 
 var incAnimation = 0;
+var typeAnimation = "1";
 
 var geometryMeshFloor;
 var geometryMeshLetterA;
@@ -13,6 +15,9 @@ var geometryMeshLetterO;
 var geometryMeshLetterU;
 ConstructFloor();
 ConstructAllLetter();
+
+var groupLetters = new THREE.Object3D();
+var groupAll = new THREE.Object3D();
 
 
 function DrawLetter(letter){
@@ -25,12 +30,8 @@ function DrawLetter(letter){
 		case "A":
 			geometryMeshLetterA.rotateOnAxis(
 					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
-
-			var position = new THREE.Vector3();
-			geometryMeshLetterA.translateOnAxis(
-					new THREE.Vector3(-1, -1, 0).normalize(),1.15);
-			scene.add( geometryMeshLetterA );	
 			
+			scene.add( geometryMeshLetterA );
 			renderer.clear();
 			renderer.render(scene, camera);
 			break;
@@ -41,9 +42,10 @@ function DrawLetter(letter){
 					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle); 
 			
 			geometryMeshLetterE.translateOnAxis(
-					new THREE.Vector3(-0.47, -1, 0).normalize(),0.88);
-			scene.add( geometryMeshLetterE );				
+					new THREE.Vector3(-0.47, -1, 0).normalize(),0.88);			
 			
+
+			scene.add( geometryMeshLetterE );
 			renderer.clear();
 			renderer.render(scene, camera);
 			break;
@@ -54,9 +56,10 @@ function DrawLetter(letter){
 					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
 			
 			geometryMeshLetterI.translateOnAxis(
-					new THREE.Vector3(0, -1, 0).normalize(),0.81);
-			scene.add( geometryMeshLetterI );				
+					new THREE.Vector3(0, -1, 0).normalize(),0.81);				
 			
+
+			scene.add( geometryMeshLetterI );
 			renderer.clear();
 			renderer.render(scene, camera);
 			break;
@@ -67,9 +70,10 @@ function DrawLetter(letter){
 					new THREE.Vector3(rotationX, rotationY, rotationZ).normalize(), rotationAngle);
 			
 			geometryMeshLetterO.translateOnAxis(
-					new THREE.Vector3(0.5, -1, 0).normalize(),0.9);
-			scene.add( geometryMeshLetterO );		
+					new THREE.Vector3(0.5, -1, 0).normalize(),0.9);		
 			
+
+			scene.add( geometryMeshLetterO );
 			renderer.clear();
 			renderer.render(scene, camera);
 			break;
@@ -81,8 +85,9 @@ function DrawLetter(letter){
 			
 			geometryMeshLetterU.translateOnAxis(
 					new THREE.Vector3(1, -1, 0).normalize(),1.11);
-			scene.add( geometryMeshLetterU );
 			
+
+			scene.add( geometryMeshLetterU );
 			renderer.clear();
 			renderer.render(scene, camera);
 			break;
@@ -91,13 +96,91 @@ function DrawLetter(letter){
 	}
 }
 
+function DrawAllLettersInScene(type){
+	incAnimation=-1;
+	//Resetar as configurações
+	RemoveAllObjectsInScene();
+	ConstructAllLetter();
+	
+	ConstructFloor();		
+	
+	switch (String(type)) {
+		case "1"://normal
+			geometryMeshLetterA.position.set(-2.3*fatorfloor,-1.75*fatorfloor,0*fatorfloor);
+			geometryMeshLetterE.position.set(-1.1*fatorfloor,-1.67*fatorfloor,0*fatorfloor);
+			geometryMeshLetterI.position.set( 0*fatorfloor,  -1.75*fatorfloor,0*fatorfloor);
+			geometryMeshLetterO.position.set( 1.1*fatorfloor,-1.67*fatorfloor,0*fatorfloor);
+			geometryMeshLetterU.position.set( 2.3*fatorfloor,-1.67*fatorfloor,0*fatorfloor);
+			
+		break;
+			
+		case "2"://ciranda
+			geometryMeshLetterA.position.set(-1.8*fatorfloor,-1.75*fatorfloor,0*fatorfloor);
+			geometryMeshLetterE.position.set(-0.5*fatorfloor,-1.67*fatorfloor,1.5*fatorfloor);
+			geometryMeshLetterI.position.set( 1.3*fatorfloor,-1.75*fatorfloor,1.1*fatorfloor);
+			geometryMeshLetterO.position.set( 1.3*fatorfloor,-1.67*fatorfloor,-1.1*fatorfloor);
+			geometryMeshLetterU.position.set( -0.5*fatorfloor,-1.67*fatorfloor,-1.5*fatorfloor);
+		
+		break;
+		
+		case "3": //trem
+			geometryMeshLetterA.position.set(-2.3*fatorfloor,-1.75*fatorfloor,0*fatorfloor);
+			geometryMeshLetterE.position.set(-1.1*fatorfloor,-1.67*fatorfloor,0*fatorfloor);
+			geometryMeshLetterI.position.set( 0*fatorfloor,  -1.75*fatorfloor,0*fatorfloor);
+			geometryMeshLetterO.position.set( 1.1*fatorfloor,-1.67*fatorfloor,0*fatorfloor);
+			geometryMeshLetterU.position.set( 2.3*fatorfloor,-1.67*fatorfloor,0*fatorfloor);
+			
+		break;
+		default:
+			break;
+	}
+	
+	groupLetters = new THREE.Object3D();
+	groupAll = new THREE.Object3D();
+	
+	groupLetters.add(geometryMeshLetterA);
+	groupLetters.add(geometryMeshLetterE);
+	groupLetters.add(geometryMeshLetterI);
+	groupLetters.add(geometryMeshLetterO);
+	groupLetters.add(geometryMeshLetterU);
+	
+	groupAll.add(groupLetters);
+	groupAll.add(geometryMeshFloor);
+	
+	
+	scene.add( groupAll );
+	
+	incAnimation=0;
+}
 
 function Animation(){
+	if(typeAnimation == "2")
+		groupLetters.rotateOnAxis(new THREE.Vector3(0, 1, 0).normalize(), 0.01);
+	else if(typeAnimation == "3"){
+		groupLetters.translateX(0.01);
+		/*
+		if((groupLetters.position.x)%1.8 > 0.2)
+			geometryMeshLetterU.position.x = -2.7*fatorfloor*(1.3);
+		if((groupLetters.position.x)%1.8 > 0.5)
+			geometryMeshLetterO.position.x = -2.7*fatorfloor;
+		if((groupLetters.position.x)%1.8 > 0.8)
+			geometryMeshLetterI.position.x = -2.7*fatorfloor;
+		if((groupLetters.position.x)%1.8 > 1.3)
+			geometryMeshLetterE.position.x = -2.7*fatorfloor;
+		if((groupLetters.position.x)%1.8 > 1.7)
+			geometryMeshLetterA.position.x = -2.7*fatorfloor;
+		*/
+		
+		if(groupLetters.position.x > 2)
+			groupLetters.position.x = -2;
+	}
+	
 	if(incAnimation>89)
 		incAnimation=0;
 	
 	switch (Math.floor(incAnimation/15)) {
 	case 0:
+				
 		geometryMeshLetterA.scale.x += 0.035;
 		
 		geometryMeshLetterE.translateX(0.01);
@@ -163,6 +246,7 @@ function Animation(){
 	break;
 	
 	case 4:
+		
 		geometryMeshLetterA.scale.x -= 0.035;
 		
 		geometryMeshLetterE.rotateOnAxis(
@@ -170,7 +254,7 @@ function Animation(){
 		
 		geometryMeshLetterI.translateX(-0.011);
 		
-		geometryMeshLetterO.translateX(-0.01);
+		geometryMeshLetterO.translateX(-0.001);
 		geometryMeshLetterO.rotateOnAxis(
 				new THREE.Vector3(0, 1, 0),-0.1);
 		
@@ -182,13 +266,13 @@ function Animation(){
 		incAnimation++;
 	break;
 	
-	case 5:
+	case 5:		
 		geometryMeshLetterA.scale.x += 0.035;
 		
 		geometryMeshLetterE.rotateOnAxis(
 				new THREE.Vector3(0, 1, 0),0.105);
 		
-		geometryMeshLetterO.translateX(0.011);
+		geometryMeshLetterO.translateX(0.0011);
 		geometryMeshLetterO.rotateOnAxis(
 				new THREE.Vector3(0, 1, 0),0.1);
 		
@@ -203,6 +287,7 @@ function Animation(){
 	
 }
 
+
 function ConstructFloor() {
 	var triangleMaterialFloor = new THREE.MeshBasicMaterial({ 
 		color:0x000000, 
@@ -212,15 +297,16 @@ function ConstructFloor() {
 		});
 	var fator = 0.33;
 	var geometryFloor = new THREE.Geometry();
-	geometryFloor.vertices.push(	new THREE.Vector3(  2.95*fator, -2.95*fator, 2.95*fator ),//0
-									new THREE.Vector3( -2.95*fator, -2.95*fator, 2.95*fator ),//1
-									new THREE.Vector3( -2.95*fator, -2.95*fator,-2.95*fator ),//2
-									new THREE.Vector3(  2.95*fator, -2.95*fator,-2.95*fator ),//3
-									new THREE.Vector3(  2.95*fator, -2.75*fator, 2.95*fator ),//0
-									new THREE.Vector3( -2.95*fator, -2.75*fator, 2.95*fator ),//1
-									new THREE.Vector3( -2.95*fator, -2.75*fator,-2.95*fator ),//2
-									new THREE.Vector3(  2.95*fator, -2.75*fator,-2.95*fator ))//3
-								
+	geometryFloor.vertices.push(	
+			new THREE.Vector3(  2.95*fatorfloor, -2.25*fatorfloor, 2.95*fatorfloor ),//0
+			new THREE.Vector3( -2.95*fatorfloor, -2.25*fatorfloor, 2.95*fatorfloor ),//1
+			new THREE.Vector3( -2.95*fatorfloor, -2.25*fatorfloor,-2.95*fatorfloor ),//2
+			new THREE.Vector3(  2.95*fatorfloor, -2.25*fatorfloor,-2.95*fatorfloor ),//3
+			new THREE.Vector3(  2.95*fatorfloor, -2.05*fatorfloor, 2.95*fatorfloor ),//0
+			new THREE.Vector3( -2.95*fatorfloor, -2.05*fatorfloor, 2.95*fatorfloor ),//1
+			new THREE.Vector3( -2.95*fatorfloor, -2.05*fatorfloor,-2.95*fatorfloor ),//2
+			new THREE.Vector3(  2.95*fatorfloor, -2.05*fatorfloor,-2.95*fatorfloor ))//3
+					
 	//Plano								
 	geometryFloor.faces.push(new THREE.Face3( 0, 1, 2));
 	geometryFloor.faces.push(new THREE.Face3( 0, 3, 2));
@@ -239,6 +325,8 @@ function ConstructFloor() {
 	
 	geometryMeshFloor = new THREE.Mesh(geometryFloor, triangleMaterialFloor); 
 }
+
+
 
 function ConstructAllLetter(){
 
@@ -637,6 +725,47 @@ function ConstructAllLetter(){
 	geometryMeshLetterU = new THREE.Mesh(geometryLetterU, triangleMaterialLetterU); 
 	
 	//----------------------------------------------------------------------------------------
+}
+
+
+
+
+function RotationGroup(type){
+	switch (String(type)) {
+	case "I":
+		groupAll.rotateOnAxis(
+				new THREE.Vector3(1, 0, 0).normalize(), -0.1);
+		
+	break;
+	case "J":
+		groupAll.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0).normalize(), -0.1);
+		
+		break;
+	case "K":
+		groupAll.rotateOnAxis(
+				new THREE.Vector3(1, 0, 0).normalize(), 0.1);
+		
+		break;
+	case "L":
+		groupAll.rotateOnAxis(
+				new THREE.Vector3(0, 1, 0).normalize(), 0.1);
+		
+		break;
+	case "U":
+		groupAll.rotateOnAxis(
+				new THREE.Vector3(0, 0, 1).normalize(), 0.1);
+		
+		break;
+	case "O":
+		groupAll.rotateOnAxis(
+				new THREE.Vector3(0, 0, 1).normalize(), -0.1);
+		
+		break;
+
+	default:
+		break;
+	}
 }
 
 

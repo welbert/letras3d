@@ -17,27 +17,20 @@ var renderer = new THREE.WebGLRenderer();
 		renderer.setSize(500, 500);
 		renderer.setClearColor(new THREE.Color(255.0, 255.0, 255.0));
 		
-		DrawLetter("A");	
-		DrawLetter("E");
-		DrawLetter("I");
-		DrawLetter("O");
-		DrawLetter("U");
-		scene.add( geometryMeshFloor );
+		DrawAllLettersInScene("1");
 		
 		document.getElementById("WebGL-output").appendChild(renderer.domElement);
 		Render();
 	}	
 	
 	window.requestAnimFrame = (function(){
-		/*
-        return window.requestAnimationFrame       || 
-        window.webkitRequestAnimationFrame || 
-        window.mozRequestAnimationFrame    || 
-        window.oRequestAnimationFrame      || 
-        window.msRequestAnimationFrame     || 
-        */  
-		return  function(/* function */ callback, /* DOMElement */ element){
-	                window.setTimeout(callback, 50);
+		return  window.requestAnimationFrame   || 
+	        window.webkitRequestAnimationFrame || 
+	        window.mozRequestAnimationFrame    || 
+	        window.oRequestAnimationFrame      || 
+	        window.msRequestAnimationFrame     || 
+	        function(/* function */ callback, /* DOMElement */ element){
+	                window.setTimeout(callback, 1000/60);
 	              };
 	              
 	    })();
@@ -61,15 +54,22 @@ var renderer = new THREE.WebGLRenderer();
              
         var text = String.fromCharCode(keynum);
         text = text.toUpperCase();
-        //if((text=="A")||(text=="E")||(text=="I")||(text=="O")||(text=="U"))
-        	//DrawLetter(text);
-        //else
-        	//console.log("Letra Inválida: "+text);
+        if((text=="1")||(text=="2")||(text=="3")){
+        	DrawAllLettersInScene(text);
+        	typeAnimation = text;
+        }else if((text=="I")||(text=="J")||(text=="K")||(text=="L")||(text=="U")||(text=="O"))
+        	RotationGroup(text);
+        else
+        	console.log("Opção Inválida: "+text);
         	
 	}
 </script>
 <body onload="Init();" onkeypress="KeyPressed(event)">
-	
+	<div style="background-color: black;color: white;" align="center">
+		<span>Atividade Desenvolvida por Welbert Serra
+		<br>
+		Aperte: 1 - Estilo Normal ; 2 - Ciranda ; 3 - Trem</span>
+	</div>
 	<div id="WebGL-output"></div>
 </body>
 </html>
